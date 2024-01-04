@@ -1,0 +1,17 @@
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.exe
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.deps.json
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.runtimeconfig.json
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.dll
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.pdb
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal_Company_Mod_Applyer.MainForm.resources
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.csproj.GenerateResource.cache
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.GeneratedMSBuildEditorConfig.editorconfig
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.AssemblyInfoInputs.cache
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.AssemblyInfo.cs
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.csproj.CoreCompileInputs.cache
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.sourcelink.json
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.dll
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\refint\Lethal-Company-Mod-Applyer.dll
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.pdb
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\Lethal-Company-Mod-Applyer.genruntimeconfig.cache
+D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\obj\Debug\net8.0-windows\ref\Lethal-Company-Mod-Applyer.dll
