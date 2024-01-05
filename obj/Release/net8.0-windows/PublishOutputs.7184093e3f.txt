@@ -1,5 +1,0 @@
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\Lethal-Company-Mod-Applyer.exe
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\Lethal-Company-Mod-Applyer.dll
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\Lethal-Company-Mod-Applyer.deps.json
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\Lethal-Company-Mod-Applyer.runtimeconfig.json
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\Lethal-Company-Mod-Applyer.pdb

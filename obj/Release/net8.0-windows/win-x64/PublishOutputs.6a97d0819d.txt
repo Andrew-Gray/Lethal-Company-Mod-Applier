@@ -1,2 +1,0 @@
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\win-x64\Lethal-Company-Mod-Applyer.pdb
-D:\_DEV\Lethal-Company\Lethal-Company-Mod-Applyer\bin\Release\net8.0-windows\publish\win-x64\Lethal-Company-Mod-Applyer.exe
