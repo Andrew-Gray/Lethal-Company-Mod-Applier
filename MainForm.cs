@@ -1,5 +1,4 @@
 using System.Reflection;
-using System.IO;
 using System.IO.Compression;
 using System.Diagnostics;
 
@@ -7,100 +6,158 @@ namespace Lethal_Company_Mod_Applier
 {
     public partial class MainForm : Form
     {
+        private readonly string repoLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List";
+        private readonly string helpLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-Applier/blob/main/README.md";
+        private readonly string downloadLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List/releases/download/Release/Lethal-Company-Mod-List.zip";
+        private readonly string fileName = "Lethal-Company-Mod-List.zip";
+        private readonly string folderName = "\\Lethal-Company-Mod-List";
+
+        private string currentPath = "";
         private bool hasDownloaded = false;
 
         public MainForm()
         {
             InitializeComponent();
-            logEntry("Info: Welcome to the Lethal Company Mod Applier.");
+
+            string? location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            if (location != null)
+            {
+                currentPath = location;
+            }
+
+            LogEntry("Info: Welcome to the Lethal Company Mod Applier.");
         }
 
         private void ApplyBtn_Click(object sender, EventArgs e)
         {
-            logEntry("Info: Applying mods has started");
-            logEntry("Step: Extracting mod pack.");
+            LogEntry("Info: Applying mods has started");
 
-            string fileName = "Lethal-Company-Mod-List.zip";
-            string? currentPath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string gamePath = PathTextBox.Text;
-            string gameBepInExPath = gamePath + "\\BepInEx";
-
-            if (currentPath == null) return;
-
-            ZipFile.ExtractToDirectory(fileName, currentPath);
-
-            logEntry("Step: Applying the mods.");
-
+            LogEntry("Step: Clearing all old mods.");
             DeleteExistingMods();
 
-            //Apply BepInExPack
-            string fromPath = currentPath + "\\Lethal-Company-Mod-List\\BepInExPack";
-            string copyToPath = gamePath;
+            LogEntry("Step: Applying the mods.");
+            CopySelectedMods();
 
-            CopyFilesRecursively(fromPath, copyToPath);
+            //LogEntry("Step: Cleaning up.");
+            //CleanUpDownloadedResources();
 
-            //Apply MoreCompany
-            fromPath = currentPath + "\\Lethal-Company-Mod-List\\MoreCompany";
-            copyToPath = gameBepInExPath;
-            CopyFilesRecursively(fromPath, copyToPath);
-
-
-            logEntry("Step: Cleaning up.");
-            Directory.Delete(currentPath + "\\Lethal-Company-Mod-List", true);
-
-
-            logEntry("Info: Applying mods completed.");
+            LogEntry("Info: Applying mods completed.");
         }
 
         private void DownloadButton_Click(object sender, EventArgs e)
         {
-            logEntry("Info: Download started.");
-            logEntry("                  https://github.com/Andrew-Gray/Lethal-Company-Mod-List", false);
-            logEntry("Info: Downloading mod pack from");
+            LogEntry("Info: Download started.");
+            //LogEntry("                  " + repoLink, false);
+            LogEntry(repoLink, false, true);
+            LogEntry("Info: Downloading mod pack from");
 
-            string downloadLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List/releases/download/Release/Lethal-Company-Mod-List.zip";
-            string fileName = "Lethal-Company-Mod-List.zip";
+            DownloadMods();
+            ExtractMods();
+            ListMods();
 
-            using var client = new HttpClient();
-            using var s = client.GetStreamAsync(downloadLink);
-            using var fs = new FileStream(fileName, FileMode.OpenOrCreate);
-            s.Result.CopyTo(fs);
-
-            logEntry("Info: Download completed.");
+            LogEntry("Info: Download completed.");
 
             hasDownloaded = true;
-            showHideApplyClear();
+            ShowHideApplyClear();
         }
 
         private void PathTextBox_TextChanged(object sender, EventArgs e)
         {
-            showHideApplyClear();
+            ShowHideApplyClear();
         }
 
         private void ClearBtn_Click(object sender, EventArgs e)
         {
-            logEntry("Info: Removing mods from folder");
+            LogEntry("Info: Removing mods from folder");
             DeleteExistingMods();
-            logEntry("Info: Mods have been removed");
+            LogEntry("Info: Mods have been removed");
+        }
+
+        private void HelpLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = helpLink,
+                UseShellExecute = true
+            });
+        }
+
+        private void OpenCloseBtn_Click(object sender, EventArgs e)
+        {
+            ModsListPanel.Visible = !ModsListPanel.Visible;
+
+            if (ModsListPanel.Visible)
+            {
+                this.Height = 513;
+                LogLabel.Location = new Point(12, 332);
+                LogList.Location = new Point(12, 350);
+            }
+            else
+            {
+                this.Height = 315;
+                LogLabel.Location = new Point(12, 123);
+                LogList.Location = new Point(12, 141);
+            }
+        }
+
+        private void SelectedModsCheckListBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            int itemCount = SelectedModsCheckListBox.Items.Count + 1;
+            int selectdCount = SelectedModsCheckListBox.CheckedItems.Count + 1;
+
+            if (e.NewValue == CheckState.Unchecked)
+            {
+                selectdCount--;
+            }
+            else
+            {
+                selectdCount++;
+            }
+
+            if (selectdCount == 1)
+            {
+                ApplyBtn.Text = "Apply (Base)";
+            }
+            else if (itemCount == selectdCount)
+            {
+                ApplyBtn.Text = "Apply (All)";
+            }
+            else
+            {
+                ApplyBtn.Text = $"Apply ({selectdCount})";
+            }
+        }
+
+        private void SelectedModsCheckListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            return;
         }
 
 
-        private void showHideApplyClear()
+
+
+
+        private void ShowHideApplyClear()
         {
             string path = PathTextBox.Text;
 
             if (IsPathValid(path) && hasDownloaded)
             {
                 ApplyBtn.Enabled = true;
+                ApplyBtn.Text = "Apply (All)";
+
                 ClearBtn.Enabled = true;
+                OpenCloseBtn.Enabled = true;
             }
             else
             {
                 ApplyBtn.Enabled = false;
+                ApplyBtn.Text = "Apply";
+
                 ClearBtn.Enabled = false;
+                OpenCloseBtn.Enabled = false;
             }
         }
-
 
         private static bool IsPathValid(string path)
         {
@@ -137,20 +194,18 @@ namespace Lethal_Company_Mod_Applier
 
         private static void CopyFilesRecursively(string sourcePath, string targetPath)
         {
-            //Now Create all of the directories
             foreach (string dirPath in Directory.GetDirectories(sourcePath, "*", SearchOption.AllDirectories))
             {
                 Directory.CreateDirectory(dirPath.Replace(sourcePath, targetPath));
             }
 
-            //Copy all the files & Replaces any files with the same name
             foreach (string newPath in Directory.GetFiles(sourcePath, "*.*", SearchOption.AllDirectories))
             {
                 File.Copy(newPath, newPath.Replace(sourcePath, targetPath), true);
             }
         }
 
-        private void logEntry(string log, bool timestamp = true)
+        private void LogEntry(string log, bool timestamp = true, bool spacer = false)
         {
             string logString = "";
 
@@ -160,18 +215,89 @@ namespace Lethal_Company_Mod_Applier
                 logString += $"[{timestampString}] ";
             }
 
+            if (spacer)
+            {
+                logString += "                  ";
+            }
+
             logString += log;
 
             LogList.Items.Insert(0, logString);
         }
 
-        private void HelpLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void DownloadMods()
         {
-            System.Diagnostics.Process.Start(new ProcessStartInfo
+            using var client = new HttpClient();
+            using var s = client.GetStreamAsync(downloadLink);
+            using var fs = new FileStream(fileName, FileMode.OpenOrCreate);
+            s.Result.CopyTo(fs);
+        }
+
+        private void ExtractMods()
+        {
+            if (IsPathValid(currentPath + folderName))
             {
-                FileName = "https://github.com/Andrew-Gray/Lethal-Company-Mod-Applier/blob/main/README.md",
-                UseShellExecute = true
-            });
+                Directory.Delete(currentPath + folderName, true);
+            }
+
+            ZipFile.ExtractToDirectory(fileName, currentPath);
+        }
+
+        private void CleanUpDownloadedResources()
+        {
+            if (IsPathValid(currentPath + folderName))
+            {
+                Directory.Delete(currentPath + folderName, true);
+            }
+
+            if (File.Exists(currentPath + "\\" + fileName))
+            {
+                File.Delete(currentPath + "\\" + fileName);
+            }
+        }
+
+        private void ListMods()
+        {
+            SelectedModsCheckListBox.Items.Clear();
+
+            var dirs = Directory.GetDirectories(currentPath + folderName, "*", SearchOption.TopDirectoryOnly);
+
+            foreach (var dir in dirs)
+            {
+                string modName = Path.GetFileName(dir);
+
+                if (modName == "BepInExPack")
+                {
+                    continue;
+                }
+
+                SelectedModsCheckListBox.Items.Add(modName, true);
+            }
+        }
+
+        private void CopySelectedMods()
+        {
+            string gamePath = PathTextBox.Text;
+
+            //Apply BepInExPack
+            CopyFilesRecursively(currentPath + folderName + "\\BepInExPack", gamePath);
+
+            //Apply All Other Selected Mods
+            var dirs = Directory.GetDirectories(currentPath + folderName, "*", SearchOption.TopDirectoryOnly);
+
+            foreach (var dir in dirs)
+            {
+                string modName = Path.GetFileName(dir);
+
+                if (modName == "BepInExPack" || SelectedModsCheckListBox.CheckedItems.IndexOf(modName) < 0)
+                {
+                    continue;
+                }
+
+                string fromPath = currentPath + folderName + "\\" + modName;
+                string copyToPath = gamePath + "\\BepInEx";
+                CopyFilesRecursively(fromPath, copyToPath);
+            }
         }
     }
 }

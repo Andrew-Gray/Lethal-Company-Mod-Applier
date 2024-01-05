@@ -37,6 +37,10 @@
             LogLabel = new Label();
             LogList = new ListBox();
             HelpLink = new LinkLabel();
+            ModsListPanel = new FlowLayoutPanel();
+            SelectedModsCheckListBox = new CheckedListBox();
+            OpenCloseBtn = new Button();
+            ModsListPanel.SuspendLayout();
             SuspendLayout();
             // 
             // PathTextBox
@@ -80,7 +84,7 @@
             // 
             // DownloadButton
             // 
-            DownloadButton.Location = new Point(113, 80);
+            DownloadButton.Location = new Point(12, 80);
             DownloadButton.Name = "DownloadButton";
             DownloadButton.Size = new Size(95, 34);
             DownloadButton.TabIndex = 1;
@@ -91,7 +95,7 @@
             // LogLabel
             // 
             LogLabel.AutoSize = true;
-            LogLabel.Location = new Point(12, 135);
+            LogLabel.Location = new Point(12, 123);
             LogLabel.Name = "LogLabel";
             LogLabel.Size = new Size(35, 15);
             LogLabel.TabIndex = 5;
@@ -102,7 +106,7 @@
             LogList.CausesValidation = false;
             LogList.FormattingEnabled = true;
             LogList.ItemHeight = 15;
-            LogList.Location = new Point(12, 153);
+            LogList.Location = new Point(12, 141);
             LogList.Name = "LogList";
             LogList.Size = new Size(426, 109);
             LogList.TabIndex = 6;
@@ -118,11 +122,45 @@
             HelpLink.Text = "Help";
             HelpLink.LinkClicked += HelpLink_LinkClicked;
             // 
+            // ModsListPanel
+            // 
+            ModsListPanel.AutoSize = true;
+            ModsListPanel.Controls.Add(SelectedModsCheckListBox);
+            ModsListPanel.FlowDirection = FlowDirection.TopDown;
+            ModsListPanel.Location = new Point(9, 120);
+            ModsListPanel.Name = "ModsListPanel";
+            ModsListPanel.Size = new Size(432, 208);
+            ModsListPanel.TabIndex = 8;
+            ModsListPanel.Visible = false;
+            // 
+            // SelectedModsCheckListBox
+            // 
+            SelectedModsCheckListBox.FormattingEnabled = true;
+            SelectedModsCheckListBox.Location = new Point(3, 3);
+            SelectedModsCheckListBox.Name = "SelectedModsCheckListBox";
+            SelectedModsCheckListBox.Size = new Size(426, 202);
+            SelectedModsCheckListBox.TabIndex = 0;
+            SelectedModsCheckListBox.ItemCheck += SelectedModsCheckListBox_ItemCheck;
+            SelectedModsCheckListBox.SelectedIndexChanged += SelectedModsCheckListBox_SelectedIndexChanged;
+            // 
+            // OpenCloseBtn
+            // 
+            OpenCloseBtn.Enabled = false;
+            OpenCloseBtn.Location = new Point(113, 80);
+            OpenCloseBtn.Name = "OpenCloseBtn";
+            OpenCloseBtn.Size = new Size(95, 34);
+            OpenCloseBtn.TabIndex = 9;
+            OpenCloseBtn.Text = "Select Mods";
+            OpenCloseBtn.UseVisualStyleBackColor = true;
+            OpenCloseBtn.Click += OpenCloseBtn_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(452, 276);
+            ClientSize = new Size(452, 272);
+            Controls.Add(OpenCloseBtn);
+            Controls.Add(ModsListPanel);
             Controls.Add(HelpLink);
             Controls.Add(LogList);
             Controls.Add(LogLabel);
@@ -136,6 +174,7 @@
             MaximizeBox = false;
             Name = "MainForm";
             Text = "Lethal Company Mod Applier";
+            ModsListPanel.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -150,5 +189,8 @@
         private Label LogLabel;
         private ListBox LogList;
         private LinkLabel HelpLink;
+        private FlowLayoutPanel ModsListPanel;
+        private CheckedListBox SelectedModsCheckListBox;
+        private Button OpenCloseBtn;
     }
 }
