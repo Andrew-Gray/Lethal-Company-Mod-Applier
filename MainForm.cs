@@ -19,11 +19,7 @@ namespace Lethal_Company_Mod_Applier
         {
             InitializeComponent();
 
-            string? location = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            if (location != null)
-            {
-                currentPath = location;
-            }
+            currentPath = Directory.GetCurrentDirectory();
 
             LogEntry("Info: Welcome to the Lethal Company Mod Applier.");
         }
@@ -47,7 +43,6 @@ namespace Lethal_Company_Mod_Applier
         private void DownloadButton_Click(object sender, EventArgs e)
         {
             LogEntry("Info: Download started.");
-            //LogEntry("                  " + repoLink, false);
             LogEntry(repoLink, false, true);
             LogEntry("Info: Downloading mod pack from");
 
@@ -227,6 +222,11 @@ namespace Lethal_Company_Mod_Applier
 
         private void DownloadMods()
         {
+            if (File.Exists(currentPath + fileName))
+            {
+                File.Delete(currentPath + fileName);
+            }
+
             using var client = new HttpClient();
             using var s = client.GetStreamAsync(downloadLink);
             using var fs = new FileStream(fileName, FileMode.OpenOrCreate);
