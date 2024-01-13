@@ -8,7 +8,7 @@ namespace Lethal_Company_Mod_Applier
     {
         private readonly string repoLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List";
         private readonly string helpLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-Applier/blob/main/README.md";
-        private readonly string downloadLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List/releases/download/Release/Lethal-Company-Mod-List.zip";
+        private readonly string downloadLink = "https://github.com/Andrew-Gray/Lethal-Company-Mod-List/releases/latest/download/Lethal-Company-Mod-List.zip";
         private readonly string fileName = "Lethal-Company-Mod-List.zip";
         private readonly string folderName = "\\Lethal-Company-Mod-List";
 
