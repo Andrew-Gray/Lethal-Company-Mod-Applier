@@ -7,14 +7,13 @@ The Lethal Company Mod Applier is a small application to download and apply a pr
 
 #### Add Mods
 
-1. Under Releases, click on the latest release.
-2. Download the "Lethal-Company-Mod-Applier.exe"
-3. If you get a "Windows protected your PC" message, click on "More info", then click "Run anyway"
-4. Open Steam and go to your Library
-5. Right click on Lethal Company, Hover over "Manage", then click on "Browse local files"
-6. Copy the folder path from the top bar
-7. Paste the folder path into the mod applier textbox and click "Download"
-8. To apply all mods, click the "Apply (All)" button.
+1. Download the [Lethal-Company-Mod-Applier.exe](https://github.com/Andrew-Gray/Lethal-Company-Mod-Applier/releases/latest/download/Lethal-Company-Mod-Applier.exe) and run it.
+2. If you get a "Windows protected your PC" message, click on "More info", then click "Run anyway"
+3. Open Steam and go to your Library
+4. Right click on Lethal Company, Hover over "Manage", then click on "Browse local files"
+5. Copy the folder path from the top bar
+6. Paste the folder path into the mod applier textbox and click "Download"
+7. To apply all mods, click the "Apply (All)" button.
 	
 To apply only specific mods, click the "Select Mods" button, check/uncheck the mods. Checked will be the ones that apply. Once you have the specific mods you want applied checked, click the "Apply" button.
 
